@@ -1,9 +1,7 @@
 const net = require("net");
 const dgram = require("dgram");
-
-const TCP_PORT = 6002;
-const UDP_HOST = "DESTINO_IP";
-const UDP_PORT = 6003; // Puerto de destino UDP
+const dotenv = require("dotenv");
+dotenv.config();
 
 const server = net.createServer((client) => {
   console.log(
