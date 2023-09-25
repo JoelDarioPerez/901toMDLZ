@@ -1,5 +1,3 @@
-const data =
-  "*HQ,8170877407,V1,153620,A,3253.2366,S,06849.8709,W,000.02,000,210723,FFFF9FFF,722,310,06220,35189#";
 const mondelez = (data) => {
   const deviceIdToPlaca = {
     373437510: "FXRX57",
@@ -84,3 +82,5 @@ const mondelez = (data) => {
   };
   return `${dataObj.placa}${dataObj.latMark}${dataObj.lat}${dataObj.longMark}${dataObj.lon}${dataObj.date}${dataObj.time}${dataObj.speed}${dataObj.course}${dataObj.event}${dataObj.isValid}`;
 };
+
+export default mondelez(data);
