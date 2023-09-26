@@ -1,7 +1,7 @@
 const net = require("net");
 const dgram = require("dgram");
 const dotenv = require("dotenv");
-import { mondelez } from "./mondelez.mjs";
+import mondelez from "./mondelez.mjs";
 dotenv.config();
 
 const server = net.createServer((client) => {

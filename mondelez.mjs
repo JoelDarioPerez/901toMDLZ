@@ -83,4 +83,4 @@ const mondelez = (data) => {
   return `${dataObj.placa}${dataObj.latMark}${dataObj.lat}${dataObj.longMark}${dataObj.lon}${dataObj.date}${dataObj.time}${dataObj.speed}${dataObj.course}${dataObj.event}${dataObj.isValid}`;
 };
 
-export default mondelez(data);
+export default mondelez;
