@@ -67,18 +67,20 @@ const mondelez = (data) => {
     const lat = dataObj.lat;
     const G = lat.slice(0, 2);
     const latMin = lat.slice(2, lat.length) / 60;
-    const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(4).toString().padStart(9, "0");
+    const longitud = (parseFloat(G) + parseFloat(latMin))
+      .toFixed(4)
+      .toString()
+      .padStart(9, "0");
     return parseFloat(G) + parseFloat(latMin);
   };
-  
+
   const long = () => {
     const long = dataObj.lon;
     const G = long.slice(0, 2);
     const longMin = long.slice(2, long.length) / 60;
     return (parseFloat(G) + parseFloat(longMin)).toFixed(4).toString();
   };
-  
-  };
+
   const latitud = lat(data);
   const longitud = long(data);
   return `${dataObj.placa}${dataObj.latMark}${latitud}${dataObj.longMark}${longitud}${dataObj.date}${dataObj.time}${dataObj.speed}${dataObj.course}${dataObj.event}${dataObj.isValid}`;
