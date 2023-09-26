@@ -77,10 +77,9 @@ const mondelez = (data) => {
 
   const long = () => {
     const long = dataObj.lon;
-    const G = long.slice(0, 2);
-    const longMin = long.slice(2, long.length) / 60;
+    const G = long.slice(0, 3);
+    const longMin = (long.slice(3, long.length) / 60).toFixed(4);
     const retsultado = (parseFloat(G) + parseFloat(longMin))
-      .toFixed(4)
       .toString()
       .padStart(8, "0");
     console.log(long + G + longMin);
