@@ -31,24 +31,6 @@ const mondelez = (data) => {
   const dataSplit = data.split(",");
   const imei = parseInt(dataSplit[1], 10);
 
-  const decLat = () => {
-    const latitudEnFormato = dataSplit[5].slice(0, 9);
-    const grados = parseInt(latitudEnFormato.slice(0, 2), 10)
-      .toString()
-      .padStart(2, "0");
-    const minutos = parseFloat(latitudEnFormato.slice(2)) / 10000;
-    return `${grados.padStart(2, "0")}${minutos.toFixed(5).substring(1)}`;
-  };
-
-  const decLong = () => {
-    const longitudEnFormato = dataSplit[7].slice(0, 10);
-    const grados = parseInt(longitudEnFormato.slice(0, 3), 10)
-      .toString()
-      .padStart(3, "0");
-    const minutos = parseFloat(longitudEnFormato.slice(3)) / 10000;
-    return `${grados}${minutos.toFixed(5).substring(1)}`;
-  };
-
   const buscarPlacaPorImei = (imei) => {
     if (imei in deviceIdToPlaca) {
       return deviceIdToPlaca[imei];
@@ -69,9 +51,9 @@ const mondelez = (data) => {
 
   const dataObj = {
     id: imei,
-    lat: decLat(),
+    lat: dataSplit[5],
     latMark: latMark(),
-    lon: decLong(),
+    lon: dataSplit[7],
     longMark: lonMark(),
     speed: (parseFloat(dataSplit[9]) * 1.852).toFixed(0).padStart(3, "0"),
     course: dataSplit[10].padStart(3, "0"),
@@ -81,7 +63,21 @@ const mondelez = (data) => {
     placa: buscarPlacaPorImei(imei),
     event: "03",
   };
-  return `${dataObj.placa}${dataObj.latMark}${dataObj.lat}${dataObj.longMark}${dataObj.lon}${dataObj.date}${dataObj.time}${dataObj.speed}${dataObj.course}${dataObj.event}${dataObj.isValid}`;
+  const lat = () => {
+    const lat = dataObj.lat;
+    const G = lat.slice(0, 2);
+    const latMin = lat.slice(2, lat.length) / 60;
+    return (parseFloat(G) + parseFloat(latMin).toFixed(4)).padStart(2, "0");
+  };
+  const long = () => {
+    const long = dataObj.lon;
+    const G = long.slice(0, 2);
+    const longMin = lat.slice(2, long.length) / 60;
+    return (parseFloat(G) + parseFloat(longMin).toFixed(4)).padStart(2, "0");
+  };
+  const latitud = lat(data);
+  const longitud = long(data);
+  return `${dataObj.placa}${dataObj.latMark}${latitud}${dataObj.longMark}${longitud}${dataObj.date}${dataObj.time}${dataObj.speed}${dataObj.course}${dataObj.event}${dataObj.isValid}`;
 };
 
 export default mondelez;
