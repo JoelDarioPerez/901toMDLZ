@@ -14,6 +14,7 @@ const server = net.createServer((client) => {
   client.on("data", (data) => {
     const modifiedData = mondelez(data.toString()); // Aplica la función 'mondelez' a los datos recibidos
     console.log(`Datos modificados: ${modifiedData}`);
+    console.log(data);
 
     // Envia los datos modificados al destino UDP
     sendToUDP(modifiedData);
