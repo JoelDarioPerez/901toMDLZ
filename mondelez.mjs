@@ -83,6 +83,7 @@ const mondelez = (data) => {
       .toFixed(4)
       .toString()
       .padStart(8, "0");
+    console.log(long + G + longMin);
     console.log(retsultado);
 
     return retsultado;
