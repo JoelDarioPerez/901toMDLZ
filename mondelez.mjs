@@ -26,7 +26,7 @@ const mondelez = (data) => {
     9171129510: "DPRL74",
     9171129517: "YR4571",
     9171129535: "YP6897",
-    8170873820: "AA256KY",
+    8170873820: "PFB320",
   };
   const dataSplit = data.split(",");
   const imei = parseInt(dataSplit[1], 10);

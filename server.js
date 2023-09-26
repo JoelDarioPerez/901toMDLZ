@@ -5,6 +5,7 @@ import mondelez from "./mondelez.mjs";
 
 dotenv.config();
 
+// Crear el servidor TCP una vez
 const server = net.createServer((client) => {
   console.log(
     `Cliente conectado desde ${client.remoteAddress}:${client.remotePort}`
@@ -15,22 +16,7 @@ const server = net.createServer((client) => {
     console.log(`Datos modificados: ${modifiedData}`);
 
     // Envia los datos modificados al destino UDP
-    const udpClient = dgram.createSocket("udp4");
-    udpClient.send(
-      modifiedData,
-      0,
-      modifiedData.length,
-      process.env.UDP_PORT,
-      process.env.UDP_HOST,
-      (err) => {
-        if (err) {
-          console.error("Error al enviar datos UDP:", err);
-        } else {
-          console.log("Datos enviados con éxito al destino UDP");
-        }
-        udpClient.close();
-      }
-    );
+    sendToUDP(modifiedData);
 
     // Reenvía los datos al cliente TCP
     client.write(modifiedData);
@@ -61,3 +47,23 @@ server.on("error", (err) => {
 server.listen(process.env.TCP_PORT, () => {
   console.log(`Servidor TCP escuchando en el puerto ${process.env.TCP_PORT}`);
 });
+
+// Función para enviar datos al destino UDP
+function sendToUDP(data) {
+  const udpClient = dgram.createSocket("udp4");
+  udpClient.send(
+    data,
+    0,
+    data.length,
+    process.env.UDP_PORT,
+    process.env.UDP_HOST,
+    (err) => {
+      if (err) {
+        console.error("Error al enviar datos UDP:", err);
+      } else {
+        console.log("Datos enviados con éxito al destino UDP");
+      }
+      udpClient.close();
+    }
+  );
+}
