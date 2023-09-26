@@ -36,6 +36,15 @@ const server = net.createServer((client) => {
     console.log("Cliente desconectado");
   });
 
+  // Limitar el número de oyentes del evento 'end' a 1
+  client.on(
+    "end",
+    () => {
+      console.log("Cliente desconectado");
+    },
+    { maxListeners: 1 }
+  );
+
   client.on("error", (err) => {
     console.error("Error en la conexión con el cliente:", err);
   });
