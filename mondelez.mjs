@@ -58,13 +58,13 @@ const mondelez = (data) => {
     speed: (parseFloat(dataSplit[9]) * 1.852).toFixed(0).padStart(3, "0"),
     course: dataSplit[10].padStart(3, "0"),
     date: dataSplit[11],
-    time: time,
+    time: dataSplit[3],
     isValid: dataSplit[4],
     placa: buscarPlacaPorImei(imei),
     event: "03",
   };
   const time = convertGMT0ToGMT3(dataSplit);
-  function convertGMT0ToGMT3(dataSplit) {
+  function convertGMT0ToGMT3(data) {
     // Convertimos la hora en formato HHMMSS a un objeto Date
     const time = dataSplit[3];
     const fecha = new Date(time);
