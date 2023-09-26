@@ -67,7 +67,8 @@ const mondelez = (data) => {
     const lat = dataObj.lat;
     const G = lat.slice(0, 2);
     const latMin = lat.slice(2, lat.length) / 60;
-    return (parseFloat(G) + parseFloat(latMin).toFixed(4)).padStart(2, "0");
+    const longitud = G + latMin.toFixed(4);
+    return (parseFloat(G) + parseFloat(latMin)).padStart(2, "0");
   };
   const long = () => {
     const long = dataObj.lon;
