@@ -63,6 +63,7 @@ const mondelez = (data) => {
     placa: buscarPlacaPorImei(imei),
     event: "03",
   };
+  console.log(dataObj);
   const time = convertGMT0ToGMT3(dataSplit);
   function convertGMT0ToGMT3(data) {
     // Convertimos la hora en formato HHMMSS a un objeto Date
@@ -83,7 +84,7 @@ const mondelez = (data) => {
     const G = lat.slice(0, 2);
     const latMin = lat.slice(2, lat.length) / 60;
     const longitud = (parseFloat(G) + parseFloat(latMin))
-      .toFixed(4)
+      .toFixed(5)
       .toString()
       .padStart(7, "0");
     console.log(longitud);
@@ -93,7 +94,7 @@ const mondelez = (data) => {
   const long = () => {
     const long = dataObj.lon;
     const G = long.slice(0, 3);
-    const longMin = (long.slice(3, long.length) / 60).toFixed(4);
+    const longMin = (long.slice(3, long.length) / 60).toFixed(5);
     const retsultado = (parseFloat(G) + parseFloat(longMin))
       .toString()
       .padStart(8, "0");
@@ -105,7 +106,7 @@ const mondelez = (data) => {
 
   const latitud = lat(data);
   const longitud = long(data);
-  return `${dataObj.placa}${dataObj.latMark}${latitud}${dataObj.longMark}${longitud}${dataObj.date}${dataObj.time}${dataObj.speed}${dataObj.course}${dataObj.event}${dataObj.isValid}`;
+  return `${dataObj.placa}${dataObj.latMark}${latitud}${dataObj.longMark}${longitud}${dataObj.date}${time}${dataObj.speed}${dataObj.course}${dataObj.event}${dataObj.isValid}`;
 };
 
 export default mondelez;
