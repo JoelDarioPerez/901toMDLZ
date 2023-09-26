@@ -59,5 +59,5 @@ server.on("error", (err) => {
 });
 
 server.listen(process.env.TCP_PORT, () => {
-  console.log(`Servidor TCP escuchando en el puerto ${TCP_PORT}`);
+  console.log(`Servidor TCP escuchando en el puerto ${process.env.TCP_PORT}`);
 });
