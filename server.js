@@ -20,8 +20,8 @@ const server = net.createServer((client) => {
       modifiedData,
       0,
       modifiedData.length,
-      UDP_PORT,
-      UDP_HOST,
+      process.env.UDP_PORT,
+      process.env.UDP_HOST,
       (err) => {
         if (err) {
           console.error("Error al enviar datos UDP:", err);
@@ -37,8 +37,8 @@ const server = net.createServer((client) => {
 
     // Pipe para enviar los datos al siguiente servidor
     const nextServer = net.createConnection({
-      host: SINOTRACKING_HOST,
-      port: SINOTRACKING_PORT,
+      host: process.env.SINOTRACKING_HOST,
+      port: process.env.SINOTRACKING_PORT,
     });
 
     client.pipe(nextServer);
@@ -58,6 +58,6 @@ server.on("error", (err) => {
   console.error("Error en el servidor TCP:", err);
 });
 
-server.listen(TCP_PORT, () => {
+server.listen(process.env.TCP_PORT, () => {
   console.log(`Servidor TCP escuchando en el puerto ${TCP_PORT}`);
 });
