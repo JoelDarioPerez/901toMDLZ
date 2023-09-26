@@ -58,11 +58,26 @@ const mondelez = (data) => {
     speed: (parseFloat(dataSplit[9]) * 1.852).toFixed(0).padStart(3, "0"),
     course: dataSplit[10].padStart(3, "0"),
     date: dataSplit[11],
-    time: dataSplit[3],
+    time: time,
     isValid: dataSplit[4],
     placa: buscarPlacaPorImei(imei),
     event: "03",
   };
+  const time = convertGMT0ToGMT3(dataSplit);
+  function convertGMT0ToGMT3(dataSplit) {
+    // Convertimos la hora en formato HHMMSS a un objeto Date
+    const time = dataSplit[3];
+    const fecha = new Date(time);
+
+    // Obtenemos la diferencia de horas entre GMT 0 y GMT -3
+    const diferenciaHoras = -3;
+
+    // Ajustamos la hora del objeto Date en la diferencia de horas
+    fecha.setHours(fecha.getHours() + diferenciaHoras);
+
+    // Devolvemos la hora en formato HHMMSS
+    return fecha.toISOString().slice(11, 19);
+  }
   const lat = () => {
     const lat = dataObj.lat;
     const G = lat.slice(0, 2);
