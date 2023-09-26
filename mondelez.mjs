@@ -71,14 +71,20 @@ const mondelez = (data) => {
       .toFixed(4)
       .toString()
       .padStart(9, "0");
-    return parseFloat(G) + parseFloat(latMin);
+    console.log(longitud);
+    return longitud;
   };
 
   const long = () => {
     const long = dataObj.lon;
     const G = long.slice(0, 2);
     const longMin = long.slice(2, long.length) / 60;
-    return (parseFloat(G) + parseFloat(longMin)).toFixed(4).toString();
+    const retsultado = (parseFloat(G) + parseFloat(longMin))
+      .toFixed(4)
+      .toString();
+    console.log(retsultado);
+
+    return retsultado;
   };
 
   const latitud = lat(data);
