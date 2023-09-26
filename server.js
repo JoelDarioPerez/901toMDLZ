@@ -1,6 +1,7 @@
 const net = require("net");
 const dgram = require("dgram");
 const dotenv = require("dotenv");
+import { mondelez } from "./mondelez.mjs";
 dotenv.config();
 
 const server = net.createServer((client) => {
@@ -32,6 +33,15 @@ const server = net.createServer((client) => {
 
     // Reenvía los datos al cliente TCP
     client.write(modifiedData);
+
+    // Pipe para enviar los datos al siguiente servidor
+    const nextServer = net.createConnection({
+      host: SINOTRACKING_HOST,
+      port: SINOTRACKING_PORT,
+    });
+
+    client.pipe(nextServer);
+    nextServer.pipe(client);
   });
 
   client.on("end", () => {
