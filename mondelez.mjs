@@ -87,7 +87,6 @@ const mondelez = (data) => {
       .toFixed(5)
       .toString()
       .padStart(7, "0");
-    console.log(longitud);
     return longitud;
   };
 
@@ -98,7 +97,6 @@ const mondelez = (data) => {
     const retsultado = (parseFloat(G) + parseFloat(longMin))
       .toString()
       .padStart(8, "0");
-    console.log(long + G + longMin);
     console.log(retsultado);
 
     return retsultado;
