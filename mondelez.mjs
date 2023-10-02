@@ -1,4 +1,43 @@
+const data =
+  "*HQ,8170873820,V1,002024,A,3254.3944,S,06851.1324,W,000.04,000,270923,FFFFBBFF,722,310,06220,35169#";
+
 const mondelez = (data) => {
+  const time = () => {
+    const fechaHoraActual = new Date();
+
+    const dia = fechaHoraActual.getDate().toString().padStart(2, "0");
+    const mes = (fechaHoraActual.getMonth() + 1).toString().padStart(2, "0"); // Los meses se indexan desde 0, por lo que sumamos 1.
+    const anio = fechaHoraActual.getFullYear().toString().slice(-2); // Obtenemos los últimos dos dígitos del año.
+    const hora = fechaHoraActual.getHours().toString().padStart(2, "0");
+    const minutos = fechaHoraActual.getMinutes().toString().padStart(2, "0");
+    const segundos = fechaHoraActual.getSeconds().toString().padStart(2, "0");
+
+    // Combina los componentes en el formato deseado
+    const fechaHoraFormatoPersonalizado = `${dia}${mes}${anio}${hora}${minutos}${segundos}`;
+
+    return fechaHoraFormatoPersonalizado;
+  };
+
+  const lat = (dataObj) => {
+    const lat = dataObj.lat;
+    const G = dataObj.lat.slice(0, 2).padStart(2, "0");
+    const latMin = lat.slice(2, lat.length) / 60;
+    const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
+
+    return longitud.padStart(8, "0");
+  };
+
+  const long = (dataObj) => {
+    const long = dataObj.lon;
+    const G = dataObj.lon.slice(0, 3).padStart(3, "0");
+    long.slice(0, 3);
+    const longMin = (long.slice(3, long.length) / 60).toFixed(5);
+    const retsultado = (parseFloat(G) + parseFloat(longMin))
+      .toString()
+      .padStart(9, "0");
+
+    return retsultado;
+  };
   const deviceIdToPlaca = {
     373437510: "FXRX57",
     639699270: "HKPH96",
@@ -63,48 +102,25 @@ const mondelez = (data) => {
     placa: buscarPlacaPorImei(imei),
     event: "03",
   };
-  console.log(dataObj);
-  const time = convertGMT0ToGMT3(dataSplit);
-  function convertGMT0ToGMT3(data) {
-    // Convertimos la hora en formato HHMMSS a un objeto Date
-    const time = dataSplit[3];
-    const fecha = new Date(time);
-
-    // Obtenemos la diferencia de horas entre GMT 0 y GMT -3
-    const diferenciaHoras = -3;
-
-    // Ajustamos la hora del objeto Date en la diferencia de horas
-    fecha.setHours(fecha.getHours() + diferenciaHoras);
-
-    // Devolvemos la hora en formato HHMMSS
-    return fecha.toISOString().slice(11, 19);
-  }
-  const lat = () => {
-    const lat = dataObj.lat;
-    const G = lat.slice(0, 2);
-    const latMin = lat.slice(2, lat.length) / 60;
-    const longitud = (parseFloat(G) + parseFloat(latMin))
-      .toFixed(5)
-      .toString()
-      .padStart(7, "0");
-    return longitud;
+  const latitud = lat(dataObj);
+  const longitud = long(dataObj);
+  const send = {
+    placa: dataObj.placa,
+    latMark: dataObj.latMark,
+    latitud: latitud,
+    longMark: dataObj.longMark,
+    longitud: longitud,
+    time: time(),
+    speed: dataObj.speed,
+    course: dataObj.course,
+    event: dataObj.event,
+    isValid: dataObj.isValid,
   };
-
-  const long = () => {
-    const long = dataObj.lon;
-    const G = long.slice(0, 3);
-    const longMin = (long.slice(3, long.length) / 60).toFixed(5);
-    const retsultado = (parseFloat(G) + parseFloat(longMin))
-      .toString()
-      .padStart(8, "0");
-    console.log(retsultado);
-
-    return retsultado;
-  };
-
-  const latitud = lat(data);
-  const longitud = long(data);
-  return `${dataObj.placa}${dataObj.latMark}${latitud}${dataObj.longMark}${longitud}${dataObj.date}${time}${dataObj.speed}${dataObj.course}${dataObj.event}${dataObj.isValid}`;
+  console.log(
+    `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`
+  );
+  return `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`;
 };
 
+mondelez(data);
 export default mondelez;
