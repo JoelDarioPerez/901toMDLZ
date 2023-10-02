@@ -1,6 +1,3 @@
-const data =
-  "*HQ,8170873820,V1,002024,A,3254.3944,S,06851.1324,W,000.04,000,270923,FFFFBBFF,722,310,06220,35169#";
-
 const mondelez = (data) => {
   const time = () => {
     const fechaHoraActual = new Date();
@@ -122,5 +119,4 @@ const mondelez = (data) => {
   return `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`;
 };
 
-mondelez(data);
 export default mondelez;
