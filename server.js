@@ -173,13 +173,3 @@ function sendToUDP(modifiedData) {
     }
   );
 }
-
-// Función 'mondelez' para modificar los datos del GPS Tracker
-function mondelez(data) {
-  // Implementa tu lógica de modificación de datos aquí
-  // Por ejemplo, puedes procesar 'data' y devolver los datos modificados
-  // Debe ser una función que tome 'data' como parámetro y devuelva los datos modificados.
-  // Aquí solo se muestra como un marcador de posición, debes implementarla según tus necesidades.
-
-  return data;
-}
