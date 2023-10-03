@@ -1,3 +1,7 @@
+import net from "net";
+import dgram from "dgram";
+import dotenv from "dotenv";
+dotenv.config();
 const mondelez = (data) => {
   const time = () => {
     const fechaHoraActual = new Date();
