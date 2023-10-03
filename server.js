@@ -1,10 +1,10 @@
 import net from "net";
 import dgram from "dgram";
 import dotenv from "dotenv";
-import mondelez from "./mondelez.mjs";
+import { mondelez } from "./mondelez.mjs";
 
 dotenv.config();
-
+const modifiedPackage = mondelez(data);
 // Crear el servidor TCP una vez
 const server = net.createServer((client) => {
   console.log(
@@ -18,9 +18,6 @@ const server = net.createServer((client) => {
 
     // Envia los datos modificados al destino UDP
     sendToUDP(modifiedData);
-
-    // Reenvía los datos al cliente TCP
-    client.write(modifiedData);
 
     // Pipe para enviar los datos al siguiente servidor
     const nextServer = net.createConnection({
@@ -59,12 +56,12 @@ server.listen(process.env.TCP_PORT, () => {
 });
 
 // Función para enviar datos al destino UDP
-function sendToUDP(data) {
+function sendToUDP(modifiedData) {
   const udpClient = dgram.createSocket("udp4");
   udpClient.send(
-    data,
+    modifiedPackage,
     0,
-    data.length,
+    modifiedPackage.length,
     process.env.UDP_PORT,
     process.env.UDP_HOST,
     (err) => {

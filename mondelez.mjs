@@ -1,4 +1,4 @@
-const mondelez = (data) => {
+export const mondelez = (data) => {
   const time = () => {
     const fechaHoraActual = new Date();
 
@@ -120,3 +120,4 @@ const mondelez = (data) => {
 };
 
 export default mondelez;
+ 
