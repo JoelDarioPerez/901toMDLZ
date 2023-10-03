@@ -155,7 +155,7 @@ tcpServer.listen(6000, () => {
 function sendToUDP(modifiedData) {
   const udpClient = dgram.createSocket("udp4");
   const udpPort = 6002;
-  const udpHost = "200.89.128.108";
+  const udpHost = "35.190.156.123";
 
   udpClient.send(
     modifiedData,
