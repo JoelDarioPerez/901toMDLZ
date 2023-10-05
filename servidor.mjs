@@ -1,94 +1,25 @@
-import { dgram } from "dgram";
-// --------------------creating a udp server --------------------
+const raw = require("raw-socket");
 
-// creating a udp server
-var server = udp.createSocket("udp4");
+// Configura el servidor para escuchar en un puerto específico
+const PORT = 12345; // Puedes cambiar el puerto si lo deseas
 
-// emits when any error occurs
-server.on("error", function (error) {
-  console.log("Error: " + error);
-  server.close();
+// Crea un socket UDP crudo
+const socket = raw.createSocket({
+  protocol: raw.Protocol.UDP,
 });
 
-// emits on new datagram msg
-server.on("message", function (msg, info) {
-  console.log("Data received from client : " + msg.toString());
-  console.log(
-    "Received %d bytes from %s:%d\n",
-    msg.length,
-    info.address,
-    info.port
-  );
+// Enlaza el socket al puerto especificado
+socket.bind({ address: "0.0.0.0", port: PORT });
 
-  //sending msg
-  server.send(msg, info.port, "localhost", function (error) {
-    if (error) {
-      client.close();
-    } else {
-      console.log("Data sent !!!");
-    }
-  });
+console.log(`Servidor UDP escuchando en el puerto ${PORT}`);
+
+// Maneja eventos cuando se recibe un mensaje
+socket.on("message", (buffer, source) => {
+  console.log(`Mensaje recibido desde ${source.address}:${source.port}:`);
+  console.log(buffer.toString("hex")); // Muestra los datos en formato hexadecimal
 });
 
-//emits when socket is ready and listening for datagram msgs
-server.on("listening", function () {
-  var address = server.address();
-  var port = address.port;
-  var family = address.family;
-  var ipaddr = address.address;
-  console.log("Server is listening at port" + port);
-  console.log("Server ip :" + ipaddr);
-  console.log("Server is IP4/IP6 : " + family);
-});
-
-//emits after the socket is closed using socket.close();
-server.on("close", function () {
-  console.log("Socket is closed !");
-});
-
-server.bind(2222);
-
-setTimeout(function () {
-  server.close();
-}, 8000);
-
-// -------------------- udp client ----------------
-
-var buffer = require("buffer");
-
-// creating a client socket
-var client = udp.createSocket("udp4");
-
-//buffer msg
-var data = Buffer.from("siddheshrane");
-
-client.on("message", function (msg, info) {
-  console.log("Data received from server : " + msg.toString());
-  console.log(
-    "Received %d bytes from %s:%d\n",
-    msg.length,
-    info.address,
-    info.port
-  );
-});
-
-//sending msg
-client.send(data, 2222, "localhost", function (error) {
-  if (error) {
-    client.close();
-  } else {
-    console.log("Data sent !!!");
-  }
-});
-
-var data1 = Buffer.from("hello");
-var data2 = Buffer.from("world");
-
-//sending multiple msg
-client.send([data1, data2], 2222, "localhost", function (error) {
-  if (error) {
-    client.close();
-  } else {
-    console.log("Data sent !!!");
-  }
+// Maneja errores
+socket.on("error", (err) => {
+  console.error(`Error en el servidor UDP: ${err.message}`);
 });
