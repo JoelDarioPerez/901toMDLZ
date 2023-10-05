@@ -1,6 +1,5 @@
 import esm from "esm";
 import * as raw from "raw-socket";
-const raw = require("raw-socket");
 
 // @ts-ignore
 esm(module);
