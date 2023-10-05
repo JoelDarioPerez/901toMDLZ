@@ -1,5 +1,4 @@
-const { udpServer } = require("node-netcat");
-
+import { udpServer } from "node-netcat";
 // Configurar el servidor UDP
 const server = udpServer(12345); // Puerto en el que el servidor escuchará
 
