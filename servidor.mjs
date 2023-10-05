@@ -1,6 +1,7 @@
-import { udpServer } from "node-netcat";
+import netcat from "node-netcat";
+
 // Configurar el servidor UDP
-const server = udpServer(12345); // Puerto en el que el servidor escuchará
+const server = netcat.udpServer(12345); // Puerto en el que el servidor escuchará
 
 // Manejar eventos cuando el servidor esté listo y cuando reciba datos
 server.on("ready", () => {
