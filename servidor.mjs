@@ -1,7 +1,8 @@
 import netcat from "node-netcat";
 
 // Configurar el servidor UDP
-const server = netcat.udpServer(12345); // Puerto en el que el servidor escuchará
+const port = "6002";
+const server = netcat.udpServer(port); // Puerto en el que el servidor escuchará
 
 // Manejar eventos cuando el servidor esté listo y cuando reciba datos
 server.on("ready", () => {
