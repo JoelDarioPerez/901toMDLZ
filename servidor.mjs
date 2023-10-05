@@ -5,7 +5,7 @@ const server = netcat.udpServer(12345); // Puerto en el que el servidor escuchar
 
 // Manejar eventos cuando el servidor esté listo y cuando reciba datos
 server.on("ready", () => {
-  console.log("Servidor UDP listo para recibir datos.");
+  console.log("Servidor UDP listo para recibir datos en el puerto" + port);
 });
 
 server.on("data", (msg, clientInfo) => {
