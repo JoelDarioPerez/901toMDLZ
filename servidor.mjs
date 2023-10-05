@@ -1,30 +1,19 @@
-import netcat from "node-netcat";
+const dgram = require("node:dgram");
+const server = dgram.createSocket("udp4");
 
-const port = 5000;
-const host = "0.0.0.0";
-
-// Configurar el servidor UDP
-const server = netcat.udpServer(port, host);
-
-server.on("data", function (msg, client, protocol) {
-  console.log("rx: " + msg + ", from " + client);
-});
-
-server.on("ready", function () {
-  console.log("Servidor UDP listo para recibir datos.");
-});
-
-server.once("error", function (err) {
-  console.log(err);
-});
-
-server.once("close", function () {
-  console.log("Servidor UDP cerrado.");
-});
-
-// Iniciar el servidor UDP
-server.bind();
-
-setTimeout(function () {
+server.on("error", (err) => {
+  console.error(`server error:\n${err.stack}`);
   server.close();
-}, 30000);
+});
+
+server.on("message", (msg, rinfo) => {
+  console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+});
+
+server.on("listening", () => {
+  const address = server.address();
+  console.log(`server listening ${address.address}:${address.port}`);
+});
+
+server.bind(41234);
+// Prints: server listening 0.0.0.0:41234
