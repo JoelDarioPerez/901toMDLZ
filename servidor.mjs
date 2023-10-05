@@ -1,4 +1,9 @@
+import esm from "esm";
+
 const raw = require("raw-socket");
+
+// @ts-ignore
+esm(module);
 
 // Configura el servidor para escuchar en un puerto específico
 const PORT = 12345; // Puedes cambiar el puerto si lo deseas
