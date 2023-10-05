@@ -1,5 +1,4 @@
-var udp = require("dgram");
-
+import { dgram } from "dgram";
 // --------------------creating a udp server --------------------
 
 // creating a udp server
