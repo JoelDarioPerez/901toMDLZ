@@ -1,6 +1,17 @@
 {
   "type": "module",
   "dependencies": {
+    "esm": "^3.2.25",
     "node-netcat": "^1.4.8"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "mondelez",
+  "version": "1.0.0",
+  "main": "server.js",
+  "module": "main.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
