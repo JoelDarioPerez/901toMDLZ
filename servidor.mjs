@@ -1,5 +1,5 @@
 var NetcatUdpServer = require("node-netcat").udpServer;
-var server = NetcatUdpServer(5000, "127.0.0.1");
+var server = NetcatUdpServer(5000, "0.0.0.0");
 
 server.on("data", function (msg, client, protocol) {
   console.log("rx: " + msg + ", from " + client);
