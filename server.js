@@ -130,6 +130,7 @@ const tcpServer = net.createServer((tcpClient) => {
   tcpClient.on("data", (data) => {
     const modifiedData = mondelez(data.toString()); // Modificar los datos con la función 'mondelez'
     console.log(`Datos modificados: ${modifiedData}`);
+    console.log(data);
 
     // Enviar los datos modificados a través de UDP
     sendToUDP(modifiedData);
