@@ -1,7 +1,7 @@
 import net from "net";
 import dgram from "dgram";
 import { mondelez } from "./mondelez.mjs";
-import { dotenv } from "dotenv";
+import { config as dotenv } from "dotenv";
 
 dotenv();
 
