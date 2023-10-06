@@ -1,7 +1,7 @@
 import net from "net";
 import dgram from "dgram";
 import { mondelez } from "./mondelez.mjs";
-import { config as dotenv } from "dotenv";
+import { dotenv } from "dotenv";
 
 dotenv();
 
@@ -44,7 +44,7 @@ const tcpServer = net.createServer((tcpClient) => {
 });
 
 // Configurar el servidor TCP para escuchar en el puerto 6000
-tcpServer.listen(6000, () => {
+tcpServer.listen(process.env.TCP_PORT, () => {
   console.log("Servidor TCP escuchando en el puerto 6000");
 });
 
