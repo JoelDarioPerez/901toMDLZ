@@ -27,7 +27,11 @@ const tcpServer = net.createServer((tcpClient) => {
     sendToUDP(modifiedData);
 
     // Reenviar los datos sin modificar a SINOTRACKING_HOST y SINOTRACKING_PORT
-    sinotrackingClient.write(data);
+    try {
+      sinotrackingClient.write(data);
+    } catch (err) {
+      console.log(err);
+    }
   });
 
   // Manejar la desconexión del cliente TCP
