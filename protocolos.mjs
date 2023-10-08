@@ -1,5 +1,4 @@
 export const autoleaders = (data) => {
-  console.log(data.toString());
   const dataSplit = data.toString().split(",");
   const dataObj = {};
   dataObj.deviceId = dataSplit[1];
@@ -45,10 +44,13 @@ export const autoleaders = (data) => {
   const long = (dataObj) => {
     const longitud = dataObj.long;
     const G = longitud.slice(0, 3).padStart(3, "0");
+    console.log(G);
     const longMin = (longitud.slice(3, longitud.length) / 60).toFixed(5);
+    console.log(longMin);
     const resultado = (parseFloat(G) + parseFloat(longMin))
       .toString()
       .padStart(8, "0");
+    console.log(resultado);
 
     return resultado;
   };
