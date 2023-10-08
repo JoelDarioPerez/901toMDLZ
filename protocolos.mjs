@@ -116,7 +116,7 @@ export const autoleaders = (data) => {
   return resultado;
 };
 
-export const AL900 = (data) => {
+/* export const AL900 = (data) => {
   const patente = (obj) => {
     if (obj.id === "46127476") {
       return "AA500HD";
@@ -203,3 +203,4 @@ export const AL900 = (data) => {
   console.log(resultado);
   return resultado;
 };
+ */
