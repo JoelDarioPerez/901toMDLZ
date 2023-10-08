@@ -39,15 +39,26 @@ export const autoleaders = (data) => {
   };
 
   const long = (dataSplit) => {
-    const longitude = dataSplit[5];
-    const G = longitude.slice(0, 3).padStart(3, "0");
-    const longMin = (longitude.slice(3, longitude.length) / 60).toFixed(5);
-    const resultado = (parseFloat(G) + parseFloat(longMin))
-      .toString()
-      .padStart(8, "0");
+    const longValue = dataSplit[7]; // Cambia el índice si es necesario
+    console.log(longValue);
+    const longNumber = parseFloat(longValue); // Convierte la cadena a un número
 
-    return resultado;
+    if (!isNaN(longNumber)) {
+      // Verifica que la conversión sea exitosa
+      const G = longNumber.toString().slice(0, 3).padStart(3, "0");
+      const longMin = (longValue.slice(3) / 60).toFixed(5); // Cambia el índice si es necesario
+      const resultado = (parseFloat(G) + parseFloat(longMin))
+        .toString()
+        .padStart(8, "0");
+
+      return resultado;
+    } else {
+      // Manejar el caso en el que no se pudo convertir longValue a un número
+      console.error("Longitud no válida:", longValue);
+      return ""; // O cualquier otro valor adecuado
+    }
   };
+
   const deviceIdToPlaca = {
     373437510: "FXRX57",
     639699270: "HKPH96",
