@@ -113,10 +113,9 @@ export const autoleaders = (data) => {
     event: dataObj.event,
     isValid: dataObj.isValid,
   };
-  console.log(
-    `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`
-  );
-  return `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`;
+  const resultado = `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`;
+  console.log(resultado);
+  return resultado;
 };
 
 export const AL900 = (data) => {
