@@ -103,10 +103,10 @@ export const autoleaders = (data) => {
     } else return "+";
   };
   const hemisferioEO = lonMark(dataObj);
-  const speed = dataObj
-    .speed(parseFloat(dataSplit[9]) * 1.852)
-    .toFixed(0)
-    .padStart(3, "0");
+  const speed = () => {
+    const speed = (dataObj.speed * 1.852).toFixed(0).padStart(3, "0");
+    return speed;
+  };
   const event = "03";
   /*   dataObj.id = imei;
   dataObj.lat = dataSplit[5];
