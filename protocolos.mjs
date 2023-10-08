@@ -28,10 +28,9 @@ export const autoleaders = (data) => {
   };
 
   const long = (dataObj) => {
-    dataObj.lon = dataSplit[7];
-    const G = dataObj.lon.slice(0, 3).padStart(3, "0");
-    long.slice(0, 3);
-    const longMin = (long.slice(3, long.length) / 60).toFixed(5);
+    const longitude = dataObj.lon;
+    const G = longitude.slice(0, 3).padStart(3, "0");
+    const longMin = (longitude.slice(3, longitude.length) / 60).toFixed(5);
     const resultado = (parseFloat(G) + parseFloat(longMin))
       .toString()
       .padStart(9, "0");
