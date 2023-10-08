@@ -32,11 +32,9 @@ export const autoleaders = (data) => {
 
   const lat = (dataObj) => {
     const latValue = dataObj.lat;
-    console.log(latValue);
     const G = latValue.padStart(2, "0");
     const latMin = latValue.slice(2, latValue.length) / 60;
     const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
-
     return longitud.padStart(8, "0");
   };
   const latitud = lat(dataObj);
@@ -44,13 +42,10 @@ export const autoleaders = (data) => {
   const long = (dataObj) => {
     const longitud = dataObj.long;
     const G = longitud.slice(0, 3).padStart(3, "0");
-    console.log(G);
     const longMin = (longitud.slice(3, longitud.length) / 60).toFixed(5);
-    console.log(longMin);
     const resultado = (parseFloat(G) + parseFloat(longMin))
       .toString()
-      .padStart(8, "0");
-    console.log(resultado);
+      .padStart(9, "0");
 
     return resultado;
   };
@@ -84,15 +79,8 @@ export const autoleaders = (data) => {
     9171129535: "YP6897",
     8170873820: "PFB320",
   };
-  const imei = dataObj.id;
-
-  const buscarPlacaPorImei = (imei) => {
-    if (imei in deviceIdToPlaca) {
-      return deviceIdToPlaca[imei];
-    } else {
-      return "ID no encontrado";
-    }
-  };
+  const imei = dataObj.deviceId;
+  const patente = deviceIdToPlaca[imei];
   const latMark = (dataObj) => {
     if (dataObj.latDirection === "S") {
       return "-";
@@ -122,9 +110,8 @@ export const autoleaders = (data) => {
   dataObj.isValid = dataSplit[4];
   dataObj.placa = buscarPlacaPorImei(imei);
   dataObj.event = "03"; */
-  const placa = buscarPlacaPorImei(dataObj);
   const send = {
-    placa: placa,
+    placa: patente,
     latMark: hemisferioNS,
     latitud: latitud,
     longMark: hemisferioEO,
@@ -227,3 +214,6 @@ export const AL900 = (data) => {
   console.log(resultado);
   return resultado;
 };
+const data =
+  "*HQ,9170669667,V1,210550,A,3437.2142,S,05821.5064,W,000.01,000,081023,FBFFBBFF,722,07,04415,8412#";
+autoleaders(data);
