@@ -2,7 +2,19 @@ export const autoleaders = (data) => {
   console.log(data);
   const dataSplit = data.split(",");
   const dataObj = {};
+  dataObj.deviceId = dataSplit[1];
+  dataObj.time = dataSplit[3];
+  dataObj.isValid = dataSplit[4];
+  dataObj.lat = dataSplit[5];
+  dataObj.latDirection = [6];
+  dataObj.long = dataSplit[7];
+  dataObj.longDirection = dataSplit[8];
+  dataObj.speed = dataSplit[9];
+  dataObj.direction = dataSplit[10];
+  dataObj.date = dataSplit[11];
+  dataObj.state = dataSplit[12];
 
+  console.log(dataObj);
   const time = () => {
     const fechaHoraActual = new Date();
 
@@ -19,8 +31,8 @@ export const autoleaders = (data) => {
     return fechaHoraFormatoPersonalizado;
   };
 
-  const lat = (dataSplit) => {
-    const latValue = dataSplit[5];
+  const lat = (dataObj) => {
+    const latValue = dataObj.lat;
     console.log(latValue);
     const G = parseFloat(latValue).padStart(2, "0");
     const latMin = latValue.slice(2, latValue.length) / 60;
@@ -28,17 +40,20 @@ export const autoleaders = (data) => {
 
     return longitud.padStart(8, "0");
   };
+  const latitud = lat(dataObj);
 
-  const long = (dataSplit) => {
-    const longitude = dataSplit[7];
-    const G = longitude.slice(0, 3).padStart(3, "0");
-    const longMin = (longitude.slice(3, longitude.length) / 60).toFixed(5);
+  const long = (dataObj) => {
+    const longitud = dataObj.long;
+    const G = longitud.slice(0, 3).padStart(3, "0");
+    const longMin = (longitud.slice(3, longitud.length) / 60).toFixed(5);
     const resultado = (parseFloat(G) + parseFloat(longMin))
       .toString()
       .padStart(8, "0");
 
     return resultado;
   };
+  const longitud = long(dataObj);
+
   const deviceIdToPlaca = {
     639699270: "HKPH96",
     8170877407: "DRZV36",
@@ -67,7 +82,7 @@ export const autoleaders = (data) => {
     9171129535: "YP6897",
     8170873820: "PFB320",
   };
-  const imei = parseInt(dataSplit[1], 10);
+  const imei = dataObj.id;
 
   const buscarPlacaPorImei = (imei) => {
     if (imei in deviceIdToPlaca) {
@@ -76,44 +91,46 @@ export const autoleaders = (data) => {
       return "ID no encontrado";
     }
   };
-  const latMark = (data) => {
-    if (dataSplit[6] === "S") {
+  const latMark = (dataObj) => {
+    if (dataObj.latDirection === "S") {
       return "-";
     } else return "+";
   };
-  const lonMark = () => {
-    if (dataSplit[8] === "W") {
+  const hemisferioNS = latMark(dataObj);
+  const lonMark = (dataObj) => {
+    if (dataObj.longDirection === "W") {
       return "-";
     } else return "+";
   };
-
-  dataObj.id = imei;
+  const hemisferioEO = lonMark(dataObj);
+  const speed = dataObj
+    .speed(parseFloat(dataSplit[9]) * 1.852)
+    .toFixed(0)
+    .padStart(3, "0");
+  const event = "03";
+  /*   dataObj.id = imei;
   dataObj.lat = dataSplit[5];
   dataObj.latMark = latMark(data);
   dataObj.lon = dataSplit[7];
   dataObj.longMark = lonMark(data);
-  dataObj.speed = (parseFloat(dataSplit[9]) * 1.852)
-    .toFixed(0)
-    .padStart(3, "0");
+  dataObj.speed = 
   dataObj.course = parseFloat(dataSplit[10]).toString().padStart(3, "0");
   dataObj.date = dataSplit[11];
   dataObj.time = dataSplit[3];
   dataObj.isValid = dataSplit[4];
   dataObj.placa = buscarPlacaPorImei(imei);
-  dataObj.event = "03";
-
-  const latitud = lat(dataObj);
-  const longitud = long(dataObj);
+  dataObj.event = "03"; */
+  const placa = buscarPlacaPorImei(dataObj);
   const send = {
-    placa: dataObj.placa,
-    latMark: dataObj.latMark,
+    placa: placa,
+    latMark: hemisferioNS,
     latitud: latitud,
-    longMark: dataObj.longMark,
+    longMark: hemisferioEO,
     longitud: longitud,
     time: time(),
-    speed: dataObj.speed,
-    course: dataObj.course,
-    event: dataObj.event,
+    speed: speed,
+    course: direction,
+    event: event,
     isValid: dataObj.isValid,
   };
   const resultado = `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`;
