@@ -13,7 +13,6 @@ export const autoleaders = (data) => {
   dataObj.date = dataSplit[11];
   dataObj.state = dataSplit[12];
 
-  console.log(dataObj);
   const time = () => {
     const fechaHoraActual = new Date();
 
