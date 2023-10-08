@@ -92,7 +92,7 @@ export const autoleaders = (data) => {
     lon: dataSplit[7],
     longMark: lonMark(),
     speed: (parseFloat(dataSplit[9]) * 1.852).toFixed(0).padStart(3, "0"),
-    course: dataSplit[10].padStart(3, "0"),
+    course: dataSplit[10].toString().padStart(3, "0"),
     date: dataSplit[11],
     time: dataSplit[3],
     isValid: dataSplit[4],
