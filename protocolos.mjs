@@ -1,6 +1,6 @@
 export const autoleaders = (data) => {
-  console.log(data.toString);
-  const dataSplit = data.toString().split(",");
+  console.log(data.toString());
+  const dayt = data.toString().split(",");
   const dataObj = {};
   dataObj.deviceId = dataSplit[1];
   dataObj.time = dataSplit[3];
@@ -128,7 +128,7 @@ export const autoleaders = (data) => {
     longMark: hemisferioEO,
     longitud: longitud,
     time: time(),
-    speed: speed,
+    speed: speed(),
     course: direction,
     event: event,
     isValid: dataObj.isValid,
