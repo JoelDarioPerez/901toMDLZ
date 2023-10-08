@@ -1,4 +1,5 @@
 export const autoleaders = (data) => {
+  console.log(data);
   const time = () => {
     const fechaHoraActual = new Date();
 
