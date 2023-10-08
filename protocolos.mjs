@@ -22,11 +22,20 @@ export const autoleaders = (data) => {
   const lat = (dataSplit) => {
     const latValue = dataSplit[5];
     console.log(latValue);
-    const G = parseFloat(latValue).slice(0, 2).padStart(2, "0");
-    const latMin = latValue.slice(2, latValue.length) / 60;
-    const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
+    const latNumber = parseFloat(latValue); // Convierte la cadena a un número
 
-    return longitud.padStart(8, "0");
+    if (!isNaN(latNumber)) {
+      // Verifica que la conversión sea exitosa
+      const G = latNumber.toString().slice(0, 2).padStart(2, "0");
+      const latMin = latValue.slice(2) / 60;
+      const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
+
+      return longitud.padStart(8, "0");
+    } else {
+      // Manejar el caso en el que no se pudo convertir latValue a un número
+      console.error("Latitud no válida:", latValue);
+      return ""; // O cualquier otro valor adecuado
+    }
   };
 
   const long = (dataSplit) => {
