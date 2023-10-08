@@ -129,7 +129,7 @@ export const autoleaders = (data) => {
     longitud: longitud,
     time: time(),
     speed: speed(),
-    course: direction,
+    course: dataObj.direction,
     event: event,
     isValid: dataObj.isValid,
   };
