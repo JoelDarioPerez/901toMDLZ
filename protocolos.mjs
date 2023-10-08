@@ -98,18 +98,7 @@ export const autoleaders = (data) => {
     return speed;
   };
   const event = "03";
-  /*   dataObj.id = imei;
-  dataObj.lat = dataSplit[5];
-  dataObj.latMark = latMark(data);
-  dataObj.lon = dataSplit[7];
-  dataObj.longMark = lonMark(data);
-  dataObj.speed = 
-  dataObj.course = parseFloat(dataSplit[10]).toString().padStart(3, "0");
-  dataObj.date = dataSplit[11];
-  dataObj.time = dataSplit[3];
-  dataObj.isValid = dataSplit[4];
-  dataObj.placa = buscarPlacaPorImei(imei);
-  dataObj.event = "03"; */
+
   const send = {
     placa: patente,
     latMark: hemisferioNS,
