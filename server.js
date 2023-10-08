@@ -1,7 +1,8 @@
 import net from "net";
 import dgram from "dgram";
-import { mondelez } from "./mondelez.mjs";
+import { autoleaders } from "./protocolos.mjs";
 import { config as dotenv } from "dotenv";
+import { handler } from "./handler.mjs";
 
 dotenv();
 
@@ -19,12 +20,12 @@ const tcpServer = net.createServer((tcpClient) => {
 
   // Manejar datos recibidos desde el GPS Tracker
   tcpClient.on("data", (data) => {
-    const modifiedData = mondelez(data.toString()); // Modificar los datos con la función 'mondelez'
+    const modifiedData = autoleaders(data.toString()); // Modificar los datos con la función 'mondelez'
     console.log(`Datos modificados: ${modifiedData}`);
     console.log(data.toString());
 
     // Enviar los datos modificados a través de UDP
-    sendToUDP(modifiedData);
+    handler(modifiedData);
 
     // Reenviar los datos sin modificar a SINOTRACKING_HOST y SINOTRACKING_PORT
     try {
