@@ -92,7 +92,7 @@ export const autoleaders = (data) => {
     lon: dataSplit[7],
     longMark: lonMark(),
     speed: (parseFloat(dataSplit[9]) * 1.852).toFixed(0).padStart(3, "0"),
-    course: dataSplit[10].toString().padStart(3, "0"),
+    course: parseFloat(dataSplit[10]).toString().padStart(3, "0"),
     date: dataSplit[11],
     time: dataSplit[3],
     isValid: dataSplit[4],
@@ -119,6 +119,10 @@ export const autoleaders = (data) => {
   return `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`;
 };
 
+const data =
+  "*HQ,9170478105,V1,183837,A,3437.1925,S,05821.3117,W,000.00,000,081023,FBFFBBFF,722,310,07125,16477#";
+
+autoleaders(data);
 export const AL900 = (data) => {
   const patente = (dataObj) => {
     if (dataObj.id === "46127476") {
