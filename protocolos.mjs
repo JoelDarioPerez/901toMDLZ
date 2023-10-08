@@ -30,7 +30,7 @@ export const autoleaders = (data) => {
   };
 
   const long = (dataSplit) => {
-    const longitude = dataSplit[5];
+    const longitude = dataSplit[7];
     const G = longitude.slice(0, 3).padStart(3, "0");
     const longMin = (longitude.slice(3, longitude.length) / 60).toFixed(5);
     const resultado = (parseFloat(G) + parseFloat(longMin))
@@ -40,7 +40,6 @@ export const autoleaders = (data) => {
     return resultado;
   };
   const deviceIdToPlaca = {
-    373437510: "FXRX57",
     639699270: "HKPH96",
     8170877407: "DRZV36",
     9170478105: "HFSX88",
