@@ -22,43 +22,23 @@ export const autoleaders = (data) => {
   const lat = (dataSplit) => {
     const latValue = dataSplit[5];
     console.log(latValue);
-    const latNumber = parseFloat(latValue); // Convierte la cadena a un número
+    const G = parseFloat(latValue).padStart(2, "0");
+    const latMin = latValue.slice(2, latValue.length) / 60;
+    const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
 
-    if (!isNaN(latNumber)) {
-      // Verifica que la conversión sea exitosa
-      const G = latNumber.toString().slice(0, 2).padStart(2, "0");
-      const latMin = latValue.slice(2) / 60;
-      const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
-
-      return longitud.padStart(8, "0");
-    } else {
-      // Manejar el caso en el que no se pudo convertir latValue a un número
-      console.error("Latitud no válida:", latValue);
-      return ""; // O cualquier otro valor adecuado
-    }
+    return longitud.padStart(8, "0");
   };
 
   const long = (dataSplit) => {
-    const longValue = dataSplit[7]; // Cambia el índice si es necesario
-    console.log(longValue);
-    const longNumber = parseFloat(longValue); // Convierte la cadena a un número
+    const longitude = dataSplit[5];
+    const G = longitude.slice(0, 3).padStart(3, "0");
+    const longMin = (longitude.slice(3, longitude.length) / 60).toFixed(5);
+    const resultado = (parseFloat(G) + parseFloat(longMin))
+      .toString()
+      .padStart(8, "0");
 
-    if (!isNaN(longNumber)) {
-      // Verifica que la conversión sea exitosa
-      const G = longNumber.toString().slice(0, 3).padStart(3, "0");
-      const longMin = (longValue.slice(3) / 60).toFixed(5); // Cambia el índice si es necesario
-      const resultado = (parseFloat(G) + parseFloat(longMin))
-        .toString()
-        .padStart(8, "0");
-
-      return resultado;
-    } else {
-      // Manejar el caso en el que no se pudo convertir longValue a un número
-      console.error("Longitud no válida:", longValue);
-      return ""; // O cualquier otro valor adecuado
-    }
+    return resultado;
   };
-
   const deviceIdToPlaca = {
     373437510: "FXRX57",
     639699270: "HKPH96",
