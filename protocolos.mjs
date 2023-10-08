@@ -1,5 +1,7 @@
 export const autoleaders = (data) => {
   console.log(data);
+  const dataObj = {};
+
   const time = () => {
     const fechaHoraActual = new Date();
 
@@ -17,7 +19,7 @@ export const autoleaders = (data) => {
   };
 
   const lat = (dataObj) => {
-    const lat = dataObj.lat;
+    dataObj.lat = dataSplit[5];
     const G = dataObj.lat.slice(0, 2).padStart(2, "0");
     const latMin = lat.slice(2, lat.length) / 60;
     const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
@@ -25,7 +27,7 @@ export const autoleaders = (data) => {
     return longitud.padStart(8, "0");
   };
   const long = (dataObj) => {
-    const long = dataObj.lon;
+    dataObj.lon = dataSplit[7];
     const G = dataObj.lon.slice(0, 3).padStart(3, "0");
     long.slice(0, 3);
     const longMin = (long.slice(3, long.length) / 60).toFixed(5);
