@@ -1,6 +1,6 @@
 export const autoleaders = (data) => {
-  console.log(data);
-  const dataSplit = data.split(",");
+  console.log(data.toString);
+  const dataSplit = data.toString().split(",");
   const dataObj = {};
   dataObj.deviceId = dataSplit[1];
   dataObj.time = dataSplit[3];
