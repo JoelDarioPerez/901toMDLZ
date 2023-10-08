@@ -34,7 +34,11 @@ const tcpServer = net.createServer((tcpClient) => {
     // Reenviar los datos sin modificar a SINOTRACKING_HOST y SINOTRACKING_PORT
     if (data.length === 90)
       try {
-        sinotrackingClient.write(data);
+        if (data.starsWith("*HQ")) {
+          return sinotrackingClient.write(data);
+        } else if (data.starsWith("2929" && data.length === 90))
+          return sinotrackingClientAL900.write(data);
+        else console.log("No se reconoce el protocolo") && null;
       } catch (err) {
         console.log(err);
       }
