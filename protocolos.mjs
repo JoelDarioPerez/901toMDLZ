@@ -214,6 +214,3 @@ export const AL900 = (data) => {
   console.log(resultado);
   return resultado;
 };
-const data =
-  "*HQ,9170669667,V1,210550,A,3437.2142,S,05821.5064,W,000.01,000,081023,FBFFBBFF,722,07,04415,8412#";
-autoleaders(data);
