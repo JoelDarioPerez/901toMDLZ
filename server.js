@@ -29,7 +29,7 @@ const tcpServer = net.createServer((tcpClient) => {
     console.log(data.toString());
 
     // Enviar los datos modificados a través de UDP
-    handler(modifiedData);
+    sendToUDP(modifiedData);
 
     // Reenviar los datos sin modificar a SINOTRACKING_HOST y SINOTRACKING_PORT
     if (data.length === 90)
