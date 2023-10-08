@@ -21,6 +21,7 @@ export const autoleaders = (data) => {
 
   const lat = (dataSplit) => {
     const latValue = dataSplit[5];
+    console.log(latValue);
     const G = parseFloat(latValue).slice(0, 2).padStart(2, "0");
     const latMin = latValue.slice(2, latValue.length) / 60;
     const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
