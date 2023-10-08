@@ -6,7 +6,7 @@ export const autoleaders = (data) => {
   dataObj.time = dataSplit[3];
   dataObj.isValid = dataSplit[4];
   dataObj.lat = dataSplit[5];
-  dataObj.latDirection = [6];
+  dataObj.latDirection = dataSplit[6];
   dataObj.long = dataSplit[7];
   dataObj.longDirection = dataSplit[8];
   dataObj.speed = dataSplit[9];
@@ -34,7 +34,7 @@ export const autoleaders = (data) => {
   const lat = (dataObj) => {
     const latValue = dataObj.lat;
     console.log(latValue);
-    const G = parseFloat(latValue).padStart(2, "0");
+    const G = latValue.padStart(2, "0");
     const latMin = latValue.slice(2, latValue.length) / 60;
     const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
 
