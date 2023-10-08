@@ -74,7 +74,7 @@ export const autoleaders = (data) => {
       return "ID no encontrado";
     }
   };
-  const latMark = () => {
+  const latMark = (data) => {
     if (dataSplit[6] === "S") {
       return "-";
     } else return "+";
@@ -88,9 +88,9 @@ export const autoleaders = (data) => {
   const dataObj = {
     id: imei,
     lat: dataSplit[5],
-    latMark: latMark(),
+    latMark: latMark(data),
     lon: dataSplit[7],
-    longMark: lonMark(),
+    longMark: lonMark(data),
     speed: (parseFloat(dataSplit[9]) * 1.852).toFixed(0).padStart(3, "0"),
     course: parseFloat(dataSplit[10]).toString().padStart(3, "0"),
     date: dataSplit[11],
