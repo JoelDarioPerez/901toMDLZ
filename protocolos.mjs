@@ -1,5 +1,6 @@
 export const autoleaders = (data) => {
   console.log(data);
+  const dataSplit = data.split(",");
   const dataObj = {};
 
   const time = () => {
@@ -18,8 +19,8 @@ export const autoleaders = (data) => {
     return fechaHoraFormatoPersonalizado;
   };
 
-  const lat = (dataObj) => {
-    const latValue = dataObj.lat;
+  const lat = (dataSplit) => {
+    const latValue = dataSplit[5];
     const G = latValue.toString().slice(0, 2).padStart(2, "0");
     const latMin = latValue.slice(2, latValue.length) / 60;
     const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
@@ -27,13 +28,13 @@ export const autoleaders = (data) => {
     return longitud.padStart(8, "0");
   };
 
-  const long = (dataObj) => {
-    const longitude = dataObj.lon;
+  const long = (dataSplit) => {
+    const longitude = dataSplit[5];
     const G = longitude.slice(0, 3).padStart(3, "0");
     const longMin = (longitude.slice(3, longitude.length) / 60).toFixed(5);
     const resultado = (parseFloat(G) + parseFloat(longMin))
       .toString()
-      .padStart(9, "0");
+      .padStart(8, "0");
 
     return resultado;
   };
@@ -66,7 +67,6 @@ export const autoleaders = (data) => {
     9171129535: "YP6897",
     8170873820: "PFB320",
   };
-  const dataSplit = data.split(",");
   const imei = parseInt(dataSplit[1], 10);
 
   const buscarPlacaPorImei = (imei) => {
