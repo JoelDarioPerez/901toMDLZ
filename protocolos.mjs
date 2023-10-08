@@ -118,11 +118,17 @@ export const autoleaders = (data) => {
   );
   return `${send.placa}${send.latMark}${send.latitud}${send.longMark}${send.longitud}${send.time}${send.speed}${send.course}${send.event}${send.isValid}`;
 };
-const data =
-  "292980002846344216231008004328834372138582151800000251ffff000082fc0000001e780b0a0000340b0d";
 
 export const AL900 = (data) => {
-  const patente = "FXRX57";
+  const patente = (dataObj) => {
+    if (dataObj.id === "46127476") {
+      return "AA500HD";
+    } else if (dataObj.id === "46344216") {
+      return "FXRX57";
+    } else return dataObj.id;
+    // Agrega más condiciones aquí si es necesario
+  };
+
   const latitud = (data) => {
     const Latgrados = data.substring(31, 33);
     const latMin = data.substring(33, 35);
@@ -133,6 +139,7 @@ export const AL900 = (data) => {
     ).toFixed(5);
     return resultado;
   };
+
   const longitud = (data) => {
     const longG = data.substring(39, 41);
     const longMin = data.substring(41, 43);
@@ -141,13 +148,15 @@ export const AL900 = (data) => {
       parseFloat(longG) +
       (parseFloat(longMin) + parseFloat(longMindec)) / 60
     ).toFixed(5);
-    return resultado;
+    return resultado.toString().padStart(9, "0");
   };
-  const googleLink = () => {
+
+  const googleLink = (obj) => {
     const maps = `https://www.google.com/maps/place/-${obj.latitud},-${obj.longitud}`;
     console.log(maps);
     return maps;
   };
+
   const yy = data.substring(18, 20);
   const mm = data.substring(20, 22);
   const dd = data.substring(22, 24);
@@ -157,6 +166,16 @@ export const AL900 = (data) => {
   const horaUTC = new Date(Date.UTC(yy, mm - 1, dd, hh, mi, ss));
   horaUTC.setUTCHours(horaUTC.getUTCHours());
 
+  const isValid = () => {
+    const isValid = data.substring(54, 56);
+    if (isValid === "ff") {
+      return "A";
+    } else if (isValid === "7f") {
+      return "V";
+    }
+    // Agrega más condiciones si es necesario
+  };
+
   const obj = {};
   obj.dia = horaUTC.getDate().toString().padStart(2, "0");
   obj.mes = (horaUTC.getMonth() + 1).toString().padStart(2, "0");
@@ -164,24 +183,26 @@ export const AL900 = (data) => {
   obj.hora = horaUTC.getHours().toString().padStart(2, "0");
   obj.min = horaUTC.getMinutes().toString().padStart(2, "0");
   obj.seg = horaUTC.getSeconds().toString().padStart(2, "0");
+  obj.id = data.substring(10, 18);
   obj.latDirection = data.substring(30, 31);
   obj.latitud = latitud(data);
   obj.longDirection = data.substring(40, 41);
   obj.longitud = longitud(data);
   obj.speed = data.substring(47, 50);
   obj.course = data.substring(51, 54);
-  obj.gps = data.substring(54, 56);
+  obj.gps = isValid(data);
   obj.fuel = data.substring(56, 62);
   obj.state = data.substring(62, 70);
   obj.otherState = data.substring(70, data.length);
-  obj.googleLink = googleLink();
+  obj.googleLink = googleLink(obj);
   obj.event = "03";
-  console.log(obj);
-  const resultado = `${patente}-${obj.latitud}-${obj.longitud}${obj.dia}${obj.mes}${obj.anio}${obj.hora}${obj.min}${obj.seg}${obj.speed}${obj.course}${obj.event}${obj.gps}$`;
-  console.log(resultado.length);
-  console.log(resultado);
 
+  const resultado = `${patente(obj)}-${obj.latitud}-${obj.longitud}${obj.dia}${
+    obj.mes
+  }${obj.anio}${obj.hora}${obj.min}${obj.seg}${obj.speed}${obj.course}${
+    obj.event
+  }${obj.gps}`;
+
+  console.log(resultado);
   return resultado;
 };
-
-AL900(data);

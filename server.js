@@ -13,6 +13,10 @@ const tcpServer = net.createServer((tcpClient) => {
   );
 
   // Crear una conexión TCP hacia SINOTRACKING_HOST y SINOTRACKING_PORT
+  const sinotrackingClientAL900 = net.createConnection({
+    host: process.env.SINOTRACKING_HOST,
+    port: parseInt(process.env.SINOTRACKINGAL900_PORT),
+  });
   const sinotrackingClient = net.createConnection({
     host: process.env.SINOTRACKING_HOST,
     port: parseInt(process.env.SINOTRACKING_PORT),
@@ -20,7 +24,7 @@ const tcpServer = net.createServer((tcpClient) => {
 
   // Manejar datos recibidos desde el GPS Tracker
   tcpClient.on("data", (data) => {
-    const modifiedData = autoleaders(data.toString()); // Modificar los datos con la función 'mondelez'
+    const modifiedData = handler(data.toString()); // Modificar los datos con la función 'mondelez'
     console.log(`Datos modificados: ${modifiedData}`);
     console.log(data.toString());
 
@@ -28,11 +32,12 @@ const tcpServer = net.createServer((tcpClient) => {
     handler(modifiedData);
 
     // Reenviar los datos sin modificar a SINOTRACKING_HOST y SINOTRACKING_PORT
-    try {
-      sinotrackingClient.write(data);
-    } catch (err) {
-      console.log(err);
-    }
+    if (data.length === 90)
+      try {
+        sinotrackingClient.write(data);
+      } catch (err) {
+        console.log(err);
+      }
   });
 
   // Manejar la desconexión del cliente TCP

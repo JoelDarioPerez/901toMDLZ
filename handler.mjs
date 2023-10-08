@@ -3,7 +3,7 @@ import { AL900 } from "./protocolos.mjs";
 
 const handler = (data) => {
   if (data.startsWith("2929") && data.length === 90) {
-    AL900(data);
+    return AL900(data);
   } else data.startsWith("*HQ") && data.length === 80;
   {
     return autoleaders(data);
