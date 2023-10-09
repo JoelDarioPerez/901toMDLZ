@@ -121,19 +121,12 @@ export const autoleaders = (data) => {
 export const AL900 = (data) => {
   try {
     const dataAL = data.toString("hex");
-    const patente = (obj) => {
-      if (obj.id === "46127476") {
-        return "AA500HD";
-      } else if (obj.id === "46344216") {
-        return "FXRX57";
-      } else return obj.id;
-      // Agrega más condiciones aquí si es necesario
-    };
+    const patente = "FXRX57";
 
-    const latitud = (data) => {
-      const Latgrados = data.substring(31, 33);
-      const latMin = data.substring(33, 35);
-      const latMindec = data.substring(35, 38) / 1000;
+    const latitud = (dataAL) => {
+      const Latgrados = dataAL.substring(31, 33);
+      const latMin = dataAL.substring(33, 35);
+      const latMindec = dataAL.substring(35, 38) / 1000;
       const resultado = (
         parseFloat(Latgrados) +
         (parseFloat(latMin) + parseFloat(latMindec)) / 60
@@ -141,10 +134,10 @@ export const AL900 = (data) => {
       return resultado;
     };
 
-    const longitud = (data) => {
-      const longG = data.substring(39, 41);
-      const longMin = data.substring(41, 43);
-      const longMindec = data.substring(43, 46) / 1000;
+    const longitud = (dataAL) => {
+      const longG = dataAL.substring(39, 41);
+      const longMin = dataAL.substring(41, 43);
+      const longMindec = dataAL.substring(43, 46) / 1000;
       const resultado = (
         parseFloat(longG) +
         (parseFloat(longMin) + parseFloat(longMindec)) / 60
@@ -167,8 +160,8 @@ export const AL900 = (data) => {
     const horaUTC = new Date(Date.UTC(yy, mm - 1, dd, hh, mi, ss));
     horaUTC.setUTCHours(horaUTC.getUTCHours());
 
-    const isValid = () => {
-      const isValid = data.substring(54, 56);
+    const isValid = (dataAL) => {
+      const isValid = dataAL.substring(54, 56);
       if (isValid === "ff") {
         return "A";
       } else if (isValid === "7f") {
@@ -184,17 +177,17 @@ export const AL900 = (data) => {
     obj.hora = horaUTC.getHours().toString().padStart(2, "0");
     obj.min = horaUTC.getMinutes().toString().padStart(2, "0");
     obj.seg = horaUTC.getSeconds().toString().padStart(2, "0");
-    obj.id = data.substring(10, 18);
-    obj.latDirection = data.substring(30, 31);
-    obj.latitud = latitud(data);
-    obj.longDirection = data.substring(40, 41);
-    obj.longitud = longitud(data);
-    obj.speed = data.substring(47, 50);
-    obj.course = data.substring(51, 54);
-    obj.gps = isValid(data);
-    obj.fuel = data.substring(56, 62);
-    obj.state = data.substring(62, 70);
-    obj.otherState = data.substring(70, data.length);
+    obj.id = dataAL.substring(10, 18);
+    obj.latDirection = dataAL.substring(30, 31);
+    obj.latitud = latitud(dataAL);
+    obj.longDirection = dataAL.substring(40, 41);
+    obj.longitud = longitud(dataAL);
+    obj.speed = dataAL.substring(47, 50);
+    obj.course = dataAL.substring(51, 54);
+    obj.gps = isValid(dataAL);
+    obj.fuel = dataAL.substring(56, 62);
+    obj.state = dataAL.substring(62, 70);
+    obj.otherState = dataAL.substring(70, dataAL.length);
     obj.googleLink = googleLink(obj);
     obj.event = "03";
 
