@@ -121,7 +121,7 @@ export const autoleaders = (data) => {
 export const AL900 = (data) => {
   try {
     const dataAL = data.toString("hex");
-    console.log(dataAL);
+    console.log("data autoleader" + dataAL);
     const patente = "FXRX57";
 
     const latitud = (dataAL) => {
