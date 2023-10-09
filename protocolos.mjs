@@ -132,6 +132,7 @@ export const AL900 = (data) => {
         parseFloat(Latgrados) +
         (parseFloat(latMin) + parseFloat(latMindec)) / 60
       ).toFixed(5);
+      console.log(resultado);
       return resultado;
     };
 
@@ -193,7 +194,7 @@ export const AL900 = (data) => {
     obj.event = "03";
 
     const resultado = `${patente}-${obj.latitud}-${obj.longitud}${obj.dia}${obj.mes}${obj.anio}${obj.hora}${obj.min}${obj.seg}${obj.speed}${obj.course}${obj.event}${obj.gps}`;
-
+    console.log(obj);
     console.log(resultado);
     return resultado;
   } catch (e) {
