@@ -36,9 +36,12 @@ const tcpServer = net.createServer((tcpClient) => {
       console.log(err);
     }
 
-    // Reenviar los datos sin modificar a SINOTRACKING_HOST y SINOTRACKING_PORT
-
-    sinotrackingClient.write(data);
+    //Reenvio a sinotracking
+    if (Buffer.byteLength(data) === 99 || Buffer.byteLength(data) === 97) {
+      sinotrackingClient.write(data);
+    } else {
+      sinotrackingClientAL900.write(data);
+    }
   });
 
   // Manejar la desconexión del cliente TCP
