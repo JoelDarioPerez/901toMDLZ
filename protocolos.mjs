@@ -33,16 +33,17 @@ export const autoleaders = (data) => {
     const lat = (dataObj) => {
       const latValue = dataObj.lat;
       const latDegrees = latValue.slice(0, 2);
-      const latMinutes = latValue.slice(2, 4)/60;
-      const latMinutesDecimals = (latValue.slice(4)/60) / 10000; // Los decimales representan minutos decimales
-      const latDecimal = parseFloat(latDegrees) + parseFloat(latMinutes) + latMinutesDecimals;
-    
+      const latMinutes = latValue.slice(2, 4) / 60;
+      const latMinutesDecimals = latValue.slice(4) / 60 / 10000; // Los decimales representan minutos decimales
+      const latDecimal =
+        parseFloat(latDegrees) + parseFloat(latMinutes) + latMinutesDecimals;
+
       // Formatea el resultado con 5 decimales
       const resultado = latDecimal.toFixed(5);
-    
+
       return resultado;
     };
-    };
+
     const latitud = lat(dataObj);
 
     const long = (dataObj) => {
