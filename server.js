@@ -25,8 +25,9 @@ const tcpServer = net.createServer((tcpClient) => {
   // Manejar datos recibidos desde el GPS Tracker
   tcpClient.on("data", (data) => {
     const modifiedData = handler(data.toString()); // Modificar los datos con la función 'mondelez'
-    console.log(`Datos modificados: ${modifiedData}`);
     console.log(data.toString());
+    console.log(`Datos modificados: ${modifiedData}`);
+
     console.log(Buffer.byteLength(data));
 
     // Enviar los datos modificados a través de UDP
