@@ -121,6 +121,7 @@ export const autoleaders = (data) => {
 export const AL900 = (data) => {
   try {
     const dataAL = data.toString("hex");
+    console.log(dataAL);
     const patente = "FXRX57";
 
     const latitud = (dataAL) => {
@@ -191,11 +192,7 @@ export const AL900 = (data) => {
     obj.googleLink = googleLink(obj);
     obj.event = "03";
 
-    const resultado = `${patente(obj)}-${obj.latitud}-${obj.longitud}${
-      obj.dia
-    }${obj.mes}${obj.anio}${obj.hora}${obj.min}${obj.seg}${obj.speed}${
-      obj.course
-    }${obj.event}${obj.gps}`;
+    const resultado = `${patente}-${obj.latitud}-${obj.longitud}${obj.dia}${obj.mes}${obj.anio}${obj.hora}${obj.min}${obj.seg}${obj.speed}${obj.course}${obj.event}${obj.gps}`;
 
     console.log(resultado);
     return resultado;
