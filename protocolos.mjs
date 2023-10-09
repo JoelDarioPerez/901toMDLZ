@@ -33,9 +33,10 @@ export const autoleaders = (data) => {
     const lat = (dataObj) => {
       const latValue = dataObj.lat;
       const G = latValue.padStart(2, "0");
-      const latMin = latValue.slice(2, latValue.length) / 60;
-      const longitud = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
-      return longitud.padStart(8, "0");
+      const latMin = (latValue.slice(3, latValue.length) / 60).toFixed(5);
+      const resultado = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
+
+      return resultado.padStart(8, "0");
     };
     const latitud = lat(dataObj);
 
