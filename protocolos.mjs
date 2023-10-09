@@ -120,7 +120,7 @@ export const autoleaders = (data) => {
 };
 export const AL900 = (data) => {
   try {
-    const dataAL = data.toString("hex");
+    const dataAL = data.toString("");
     console.log("data autoleader" + dataAL);
     const patente = "FXRX57";
 
@@ -195,6 +195,7 @@ export const AL900 = (data) => {
 
     const resultado = `${patente}-${obj.latitud}-${obj.longitud}${obj.dia}${obj.mes}${obj.anio}${obj.hora}${obj.min}${obj.seg}${obj.speed}${obj.course}${obj.event}${obj.gps}`;
     console.log(obj);
+    console.log(resultado.length);
     console.log(resultado);
     return resultado;
   } catch (e) {
