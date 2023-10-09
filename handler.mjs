@@ -9,7 +9,7 @@ export const handler = (data) => {
       Buffer.byteLength(data) === 45 ||
       (Buffer.byteLength(data) !== 99 && Buffer.byteLength(data) !== 97)
     ) {
-      return AL900(data);
+      return console.log("No se reconoce el protocolo");
     } else if (Buffer.byteLength === 12) {
       throw new Error("Handshake, no enviado");
     }
