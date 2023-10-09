@@ -125,9 +125,7 @@ export const autoleaders = (data) => {
     console.error("Error", e);
   }
 };
-autoleaders(
-  "*HQ,9170478105,V1,140809,A,3437.1904,S,05821.3097,W,000.01,000,091023,FFFFBBFF,722,310,07127,26369#"
-);
+
 /* export const AL900 = (data) => {
   try {
     const dataAL = data.toString("");
@@ -213,6 +211,3 @@ autoleaders(
   }
 };
  */
-autoleaders(
-  "*HQ,9170478105,V1,134947,A,3437.1899,S,05821.3092,W,000.01,000,091023,FBFFBBFF,722,310,07127,26369#"
-);
