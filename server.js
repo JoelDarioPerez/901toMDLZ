@@ -41,7 +41,7 @@ const tcpServer = net.createServer((tcpClient) => {
       sinotrackingClient.write(data);
     } else {
       sinotrackingClientAL900.write(data);
-      console.log(data.toString());
+      console.log("Datos AL900", data.toString());
       console.log(Buffer.byteLength(data));
     }
   });
