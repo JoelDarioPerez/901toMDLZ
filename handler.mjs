@@ -1,6 +1,5 @@
 import { autoleaders } from "./protocolos.mjs";
 import { AL900 } from "./protocolos.mjs";
-import * as buffer from "vinyl-buffer";
 
 export const handler = (data) => {
   try {
