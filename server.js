@@ -1,6 +1,6 @@
 import net from "net";
 import dgram from "dgram";
-import { autoleaders } from "./protocolos.mjs";
+import { AL900 } from "./protocolos.mjs";
 import { config as dotenv } from "dotenv";
 import { handler } from "./handler.mjs";
 
