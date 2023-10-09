@@ -1,4 +1,3 @@
-import * as e from "express";
 export const autoleaders = (data) => {
   try {
     const dataSplit = data.toString().split(",");
