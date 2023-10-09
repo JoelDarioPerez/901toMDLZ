@@ -5,7 +5,10 @@ export const handler = (data) => {
   try {
     if (Buffer.byteLength(data) === 99 || Buffer.byteLength(data) === 97) {
       return autoleaders(data);
-    } else if (Buffer.byteLength(data) === 45) {
+    } else if (
+      Buffer.byteLength(data) === 45 ||
+      (Buffer.byteLength(data) !== 99 && Buffer.byteLength(data) !== 97)
+    ) {
       return AL900(data);
     } else {
       throw new Error("Datos no válidos");
