@@ -32,11 +32,16 @@ export const autoleaders = (data) => {
 
     const lat = (dataObj) => {
       const latValue = dataObj.lat;
-      const G = latValue.padStart(2, "0");
-      const latMin = (latValue.slice(3, latValue.length) / 60).toFixed(5);
-      const resultado = (parseFloat(G) + parseFloat(latMin)).toFixed(5);
-
-      return resultado.padStart(8, "0");
+      const latDegrees = latValue.slice(0, 2);
+      const latMinutes = latValue.slice(2, 4)/60;
+      const latMinutesDecimals = (latValue.slice(4)/60) / 10000; // Los decimales representan minutos decimales
+      const latDecimal = parseFloat(latDegrees) + parseFloat(latMinutes) + latMinutesDecimals;
+    
+      // Formatea el resultado con 5 decimales
+      const resultado = latDecimal.toFixed(5);
+    
+      return resultado;
+    };
     };
     const latitud = lat(dataObj);
 
@@ -119,6 +124,9 @@ export const autoleaders = (data) => {
     console.error("Error", e);
   }
 };
+autoleaders(
+  "*HQ,9170478105,V1,140809,A,3437.1904,S,05821.3097,W,000.01,000,091023,FFFFBBFF,722,310,07127,26369#"
+);
 /* export const AL900 = (data) => {
   try {
     const dataAL = data.toString("");
