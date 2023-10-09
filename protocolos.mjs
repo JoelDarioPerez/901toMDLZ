@@ -118,7 +118,7 @@ export const autoleaders = (data) => {
     console.error("Error", e);
   }
 };
-export const AL900 = (data) => {
+/* export const AL900 = (data) => {
   try {
     const dataAL = data.toString("");
     console.log("data autoleader" + dataAL);
@@ -202,3 +202,7 @@ export const AL900 = (data) => {
     console.error("AL 900", e);
   }
 };
+ */
+autoleaders(
+  "*HQ,9170478105,V1,134947,A,3437.1899,S,05821.3092,W,000.01,000,091023,FBFFBBFF,722,310,07127,26369#"
+);
