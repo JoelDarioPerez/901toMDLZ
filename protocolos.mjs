@@ -120,7 +120,7 @@ export const autoleaders = (data) => {
 };
 export const AL900 = (data) => {
   try {
-    const data = data.toString("hex");
+    const dataAL = data.toString("hex");
     const patente = (obj) => {
       if (obj.id === "46127476") {
         return "AA500HD";
